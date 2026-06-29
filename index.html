@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An emotional, heartfelt letter exploring the depth of feeling, memory, and gratitude. You are The Perfect Reason.">
+  <title>TPR — The Perfect Reason</title>
+  
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+  <!-- Twinkling stars background container -->
+  <div id="starfield"></div>
+
+  <!-- Floating mute/unmute control -->
+  <button id="mute-btn" class="mute-btn" aria-label="Toggle Mute">
+    <!-- Unmuted SVG icon as default -->
+    <svg id="mute-icon" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.7V20.77C18.07,19.86 21,16.28 21,12C21,7.72 18.07,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+    </svg>
+  </button>
+
+
+  <!-- Main interactive workspace wrapper -->
+  <main class="scene">
+    
+    <!-- Envelope element -->
+    <div class="envelope-wrapper" id="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <!-- Back flap representing the inner pocket -->
+        <div class="envelope-back"></div>
+        
+        <!-- The actual letter paper peaking out before open -->
+        <div class="letter-preview">
+          <div class="preview-line"></div>
+          <div class="preview-line long"></div>
+          <div class="preview-line"></div>
+        </div>
+        
+        <!-- Left & Right fold flaps -->
+        <div class="envelope-left"></div>
+        <div class="envelope-right"></div>
+        
+        <!-- Bottom fold flap -->
+        <div class="envelope-bottom"></div>
+        
+        <!-- Top fold flap (opens up) -->
+        <div class="envelope-top"></div>
+        
+        <!-- Golden wax seal with 'TPR' initials -->
+        <div class="wax-seal" id="wax-seal">
+          <div class="seal-inner">
+            <span class="seal-text">TPR</span>
+          </div>
+        </div>
+
+        <!-- Hint to click to open -->
+        <div class="open-hint">
+          <span class="hint-pulse">Click to open letter</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter Container (displayed after envelope opens) -->
+    <div class="letter-container" id="letter-container">
+      <div class="paper-overlay"></div>
+      
+      <div class="letter-content" id="letter-content">
+        <!-- The text sections will be typed out here dynamically by JS. -->
+        <!-- We divide the content into structured, semantic blocks -->
+        
+        <article class="letter-text-box" id="text-box"></article>
+      </div>
+
+      <!-- Progress Indicator & Next Button -->
+      <div class="letter-actions" id="letter-actions">
+        <button id="next-btn" class="next-button" style="display: none;">
+          <span class="next-label">read next</span>
+          <span class="next-feather">✦</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Climax / Glowing Reveal (displayed at the very end) -->
+    <div class="climax-container" id="climax-container" style="display: none;">
+      <div class="tpr-reveal-container">
+        <h1 class="tpr-glow" id="climax-tpr">T · P · R</h1>
+        <h2 class="tpr-full-title" id="climax-title">The Perfect Reason</h2>
+        <p class="tpr-signature" id="climax-signature">— K.B.S</p>
+        
+        <button id="reset-btn" class="reset-button">
+          <span class="reset-label">read again</span>
+          <span class="reset-feather">✦</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>
