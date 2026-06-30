@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=8">
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 
@@ -30,10 +30,15 @@
   <div id="verification-gate" class="verification-gate">
     <div class="gate-content">
       <h2 class="gate-title">Who is reading this?</h2>
-      <div class="input-wrapper">
-        <input type="text" id="gate-input" autocomplete="off" placeholder="type here..." />
-        <div class="input-underline"></div>
-      </div>
+      <form id="gate-form" class="gate-form" action="#" onsubmit="return false;">
+        <div class="input-wrapper">
+          <input type="text" id="gate-input" autocomplete="off" placeholder="type here..." />
+          <button type="submit" id="gate-submit" class="gate-submit" aria-label="Unlock">
+            <span class="gate-submit-arrow">✦</span>
+          </button>
+          <div class="input-underline"></div>
+        </div>
+      </form>
       <p id="gate-error" class="gate-error"></p>
     </div>
   </div>
@@ -122,6 +127,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>

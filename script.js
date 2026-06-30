@@ -341,34 +341,34 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => gateInput.focus(), 300);
   }
 
-  gateInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const value = gateInput.value.trim().toLowerCase();
+  const gateForm = document.getElementById('gate-form');
+  gateForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent page reload
+    const value = gateInput.value.trim().toLowerCase();
 
-      if (value === 'tpr') {
-        // Unlock
-        gateError.classList.remove('show');
-        gate.classList.add('unlocked');
-        
-        // Reveal envelope and mute button
-        setTimeout(() => {
-          envelopeWrapper.classList.remove('locked');
-          muteBtn.classList.add('show');
-        }, 300);
-      } else {
-        // Incorrect: show mysterious space message
-        gateError.textContent = "This letter is traveling through the cosmos to find its true destination. It is not meant for you.";
-        gateError.classList.add('show');
+    if (value === 'tpr') {
+      // Unlock
+      gateError.classList.remove('show');
+      gate.classList.add('unlocked');
+      
+      // Reveal envelope and mute button
+      setTimeout(() => {
+        envelopeWrapper.classList.remove('locked');
+        muteBtn.classList.add('show');
+      }, 300);
+    } else {
+      // Incorrect: show mysterious space message
+      gateError.textContent = "This letter is traveling through the cosmos to find its true destination. It is not meant for you.";
+      gateError.classList.add('show');
 
-        // Shake animation feedback
-        gateContent.classList.add('gate-shake');
-        setTimeout(() => {
-          gateContent.classList.remove('gate-shake');
-        }, 500);
+      // Shake animation feedback
+      gateContent.classList.add('gate-shake');
+      setTimeout(() => {
+        gateContent.classList.remove('gate-shake');
+      }, 500);
 
-        // Clear input to allow typing again
-        gateInput.value = '';
-      }
+      // Clear input to allow typing again
+      gateInput.value = '';
     }
   });
 
