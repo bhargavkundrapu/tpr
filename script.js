@@ -3,94 +3,58 @@
 const letterParts = [
   // SECTION 1
   `Before you, I had no reason to look forward to anything.
-
 I just lived with whatever came my way.
 But after you…
-
 I started enjoying myself.
-
 I started treating myself as someone special.
-
 Because you made me feel that way.
 I began noticing every little thing —
-
 a song, a moment, a coincidence, a smile…
-
 and somehow, all of them reminded me of you.
-
 Every single one came from somewhere deep inside me.
 You were never just a part of my life.
-
 You were the reason I could feel my feelings fully.
-
 You were the reason life felt beautiful —
-
 not just within family…
-
 but beyond it too.`,
 
   // SECTION 2
   `But something happened between us.
-
 Something that was never in my hands.
 And even then…
-
 not even one percent of what I feel for you changed.
 I accepted your decision.
-
 I moved on from you.
-
 But my feelings?
-
 They never left.
-
 They are still here.
-
 And they will be, till the very end.
-
 Because I dont no how to forget 
-
 And there is no issue with that feelings 
-
 when i remember i will be little more happier not sad and i dont feel like something i missed `,
 
   // SECTION 3
   `Please don't feel sad.
 
 
-
-
 Don't carry any guilt.
 Because even after all these years…
-
 you are still the reason I know how to respect a girl.
-
 You are the reason I know how to face a heartbreak with a calm face.
-
 You are the reason I learned to smile in the toughest phases of life.
-
 You are the reason I learned to find a way,
-
 even when everything was against me.
-
 You are the reason I discovered how much patience I truly have.
 And I feel so lucky…
-
 that I learned all of this so early in life.
-
 It made me stronger than I ever imagined.
-
 After all these years,
-
 I am genuinely happy.
-
 Happy that you played the most beautiful role in my life.
+
 So please…
-
 change how you see this.
-
 Be happy.
-
 Without any regrets.
 Because all those reasons…
 
@@ -260,6 +224,49 @@ function renderInstant(container, paragraphs) {
   });
 }
 
+// Romantic golden petal shower generator
+function startPetalShower() {
+  const container = document.body;
+  const petalCount = 45;
+
+  for (let i = 0; i < petalCount; i++) {
+    createSinglePetal(container);
+  }
+}
+
+function createSinglePetal(parent) {
+  const petal = document.createElement('div');
+  petal.className = 'climax-petal';
+
+  const size = Math.random() * 8 + 8; // 8px to 16px
+  const startX = Math.random() * 100; // 0% to 100% viewport width
+  const delay = Math.random() * 10; // delay up to 10s for slow onset
+  const duration = Math.random() * 6 + 6; // 6s to 12s fall time
+  const drift = (Math.random() * 180 - 90) + 'px'; // horizontal wind drift
+  const rotate = (Math.random() * 720 - 360) + 'deg'; // random rotation
+
+  petal.style.width = `${size}px`;
+  petal.style.height = `${size * 0.7}px`;
+  petal.style.left = `${startX}%`;
+  petal.style.animationDelay = `${delay}s`;
+  petal.style.setProperty('--fall-duration', `${duration}s`);
+  petal.style.setProperty('--wind-drift', drift);
+  petal.style.setProperty('--rotation', rotate);
+
+  // Randomize styling variant
+  if (Math.random() < 0.25) {
+    petal.style.background = 'linear-gradient(135deg, var(--gold-accent), #ffffff)';
+    petal.style.boxShadow = '0 0 12px rgba(255, 255, 255, 0.65)';
+  }
+
+  parent.appendChild(petal);
+}
+
+function stopPetalShower() {
+  const petals = document.querySelectorAll('.climax-petal');
+  petals.forEach(p => p.remove());
+}
+
 // Handles transitions from letter reading to the climax screen
 function triggerClimaxReveal() {
   const paper = document.getElementById('letter-container');
@@ -275,6 +282,7 @@ function triggerClimaxReveal() {
     climax.style.display = 'flex';
     climax.style.opacity = '1';
     console.log("Climax revealed, reset-btn element:", document.getElementById('reset-btn'));
+    startPetalShower();
   }, 2000);
 }
 
@@ -317,13 +325,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (path) {
       path.setAttribute('d', isMuted ? mutePath : unmutePath);
     }
-    
+
     // Accessibility label
     muteBtn.setAttribute('aria-label', isMuted ? 'Unmute Sound' : 'Mute Sound');
   });
 
-  // Click envelope to break seal and open
-  envelope.addEventListener('click', () => {
+  // Tactile Drag-to-Open Wax Seal Setup
+  const waxSeal = document.getElementById('wax-seal');
+  let isDragging = false;
+  let startY = 0;
+  const dragThreshold = 80;
+
+  // Open envelope trigger
+  function openEnvelope() {
     if (envelope.classList.contains('open')) return;
 
     envelope.classList.add('open');
@@ -332,8 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
     bgAudio.play().catch(error => {
       console.warn("Audio playback was blocked or failed:", error);
     });
-
-
 
     // Slide out preview letter, then fade transition to the full paper
     setTimeout(() => {
@@ -349,11 +361,98 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }, 600);
     }, 1200);
-  });
+  }
+
+  // Pointer drag event handlers
+  function startDrag(e) {
+    if (envelope.classList.contains('open')) return;
+
+    isDragging = true;
+    startY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : e.clientY);
+    waxSeal.classList.add('dragging');
+
+    // Prevent default touch scroll or text highlight
+    if (e.cancelable) e.preventDefault();
+  }
+
+  function dragMove(e) {
+    if (!isDragging) return;
+
+    const currentY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : e.clientY);
+    let deltaY = currentY - startY;
+
+    // Restrict to downward movement only
+    if (deltaY < 0) deltaY = 0;
+    // Cap displacement at 130px
+    if (deltaY > 130) deltaY = 130;
+
+    waxSeal.style.setProperty('--drag-y', `${deltaY}px`);
+
+    // Give visual threshold feedback
+    if (deltaY >= dragThreshold) {
+      waxSeal.style.borderColor = 'var(--gold-glow)';
+      waxSeal.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.7), inset 0 2px 5px rgba(255, 255, 255, 0.2)';
+    } else {
+      waxSeal.style.borderColor = '';
+      waxSeal.style.boxShadow = '';
+    }
+  }
+
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    waxSeal.classList.remove('dragging');
+
+    // Reset feedback styles
+    waxSeal.style.borderColor = '';
+    waxSeal.style.boxShadow = '';
+
+    const currentDragY = parseFloat(waxSeal.style.getPropertyValue('--drag-y')) || 0;
+    waxSeal.style.removeProperty('--drag-y');
+
+    if (currentDragY >= dragThreshold) {
+      openEnvelope();
+    }
+  }
+
+  // Mouse drag listeners
+  waxSeal.addEventListener('mousedown', startDrag);
+  window.addEventListener('mousemove', dragMove);
+  window.addEventListener('mouseup', endDrag);
+
+  // Mobile touch drag listeners
+  waxSeal.addEventListener('touchstart', startDrag, { passive: false });
+  window.addEventListener('touchmove', dragMove, { passive: false });
+  window.addEventListener('touchend', endDrag);
+
+  // Function to crossfade space gradients (nebula-glow effect)
+  function changeNebulaGlow(styleClass) {
+    const layer1 = document.getElementById('nebula-1');
+    const layer2 = document.getElementById('nebula-2');
+
+    const activeLayer = layer1.classList.contains('active') ? layer1 : layer2;
+    const inactiveLayer = activeLayer === layer1 ? layer2 : layer1;
+
+    // Set new class on the hidden layer
+    inactiveLayer.className = 'nebula-layer ' + styleClass;
+
+    // Crossfade trigger
+    inactiveLayer.classList.add('active');
+    activeLayer.classList.remove('active');
+  }
 
   // Function to type a specific section
   function typeSection(index) {
     if (index >= letterParts.length) return;
+
+    // Shift space gradient based on visual/emotional pacing
+    if (index === 0) {
+      changeNebulaGlow('nebula-reflection');
+    } else if (index === 1) {
+      changeNebulaGlow('nebula-heartbreak');
+    } else if (index === 2) {
+      changeNebulaGlow('nebula-gratitude');
+    }
 
     // Fade next button away during typing
     nextBtn.style.display = 'none';
@@ -396,10 +495,16 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     if (e.target && (e.target.id === 'reset-btn' || e.target.closest('#reset-btn'))) {
       const climax = document.getElementById('climax-container');
-      
+
       // 1. Fade out climax container
       climax.style.opacity = '0';
-      
+
+      // Stop/remove the golden falling petals
+      stopPetalShower();
+
+      // Reset space background gradient
+      changeNebulaGlow('nebula-reflection');
+
       // Stop and reset audio to 0 seconds so next playthrough starts from start
       bgAudio.pause();
       bgAudio.currentTime = 0;
