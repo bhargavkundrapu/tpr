@@ -827,3 +827,24 @@ body {
 .nebula-gratitude {
   background: radial-gradient(circle at 50% 60%, #331f0b 0%, #050302 100%);
 }
+
+/* Interactive Floating Memories styling */
+#memories-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 4; /* render above stars (z-index 3) and nebula (z-index 2), below content (z-index 5) */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.memory-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 175, 92, 0.4) 0%, rgba(232, 175, 92, 0.05) 60%, transparent 100%);
+  pointer-events: none;
+  filter: blur(1px);
+  will-change: transform;
+}

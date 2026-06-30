@@ -543,6 +543,123 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // --- Interactive Floating Memories Engine ---
+  let memories = [];
+  let mouseX = -1000;
+  let mouseY = -1000;
+
+  // Track cursor coordinates
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouseX = -1000;
+    mouseY = -1000;
+  });
+
+  // Mobile touch coordinates
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      mouseX = e.touches[0].clientX;
+      mouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    mouseX = -1000;
+    mouseY = -1000;
+  });
+
+  function createFloatingMemories() {
+    const container = document.getElementById('memories-container');
+    if (!container) return;
+
+    const count = window.innerWidth < 768 ? 12 : 25;
+    memories = [];
+    container.innerHTML = '';
+
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'memory-particle';
+
+      const size = Math.random() * 20 + 15; // bokeh sizing 15px - 35px
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+
+      const particle = {
+        el: el,
+        x: x,
+        y: y,
+        vx: 0,
+        vy: 0,
+        baseVx: Math.random() * 0.4 - 0.2, // slow sway drift
+        baseVy: -(Math.random() * 0.5 + 0.4), // slow upward drift
+        size: size
+      };
+
+      container.appendChild(el);
+      memories.push(particle);
+    }
+  }
+
+  function animateMemories() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    memories.forEach(p => {
+      // Calculate distance from cursor
+      const diffX = p.x - mouseX;
+      const diffY = p.y - mouseY;
+      const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+      const repelRadius = 150;
+
+      if (distance < repelRadius) {
+        const force = (repelRadius - distance) / repelRadius; // 0 to 1
+        const strength = force * 2.5; // repelling speed multiplier
+        
+        p.vx += (diffX / (distance || 1)) * strength;
+        p.vy += (diffY / (distance || 1)) * strength;
+      }
+
+      // Apply friction/damping
+      p.vx *= 0.93;
+      p.vy *= 0.93;
+
+      // Update positions
+      p.x += p.baseVx + p.vx;
+      p.y += p.baseVy + p.vy;
+
+      // Screen boundary wraps
+      if (p.y < -50) {
+        p.y = height + 30;
+        p.x = Math.random() * width;
+        p.vx = 0;
+        p.vy = 0;
+      }
+      if (p.x < -50) p.x = width + 30;
+      if (p.x > width + 50) p.x = -30;
+
+      // Transform DOM
+      p.el.style.transform = `translate3d(${p.x - p.size/2}px, ${p.y - p.size/2}px, 0)`;
+    });
+
+    requestAnimationFrame(animateMemories);
+  }
+
+  // Handle window resizing
+  window.addEventListener('resize', () => {
+    createFloatingMemories();
+  });
+
+  // Initialize and run the memories system
+  createFloatingMemories();
+  animateMemories();
+
   // Pause audio when switching tabs, resume when returning
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
