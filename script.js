@@ -330,6 +330,53 @@ document.addEventListener('DOMContentLoaded', () => {
     muteBtn.setAttribute('aria-label', isMuted ? 'Unmute Sound' : 'Mute Sound');
   });
 
+  // --- Verification Gate Logic ---
+  const gate = document.getElementById('verification-gate');
+  const gateInput = document.getElementById('gate-input');
+  const gateError = document.getElementById('gate-error');
+  const gateContent = gate.querySelector('.gate-content');
+
+  // Focus the input field on load
+  if (gateInput) {
+    setTimeout(() => gateInput.focus(), 300);
+  }
+
+  gateInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const value = gateInput.value.trim().toLowerCase();
+
+      if (value === 'tpr') {
+        // Unlock
+        gateError.classList.remove('show');
+        gate.classList.add('unlocked');
+        
+        // Reveal envelope and mute button
+        setTimeout(() => {
+          envelopeWrapper.classList.remove('locked');
+          muteBtn.classList.add('show');
+        }, 300);
+      } else {
+        // Incorrect: show mysterious space message
+        gateError.textContent = "This letter is traveling through the cosmos to find its true destination. It is not meant for you.";
+        gateError.classList.add('show');
+
+        // Shake animation feedback
+        gateContent.classList.add('gate-shake');
+        setTimeout(() => {
+          gateContent.classList.remove('gate-shake');
+        }, 500);
+
+        // Clear input to allow typing again
+        gateInput.value = '';
+      }
+    }
+  });
+
+  // Refocus input if clicking the screen
+  gate.addEventListener('click', () => {
+    gateInput.focus();
+  });
+
   // Tactile Drag-to-Open Wax Seal Setup
   const waxSeal = document.getElementById('wax-seal');
   let isDragging = false;

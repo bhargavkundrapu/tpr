@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -25,6 +25,17 @@
   <div class="nebula-container" id="nebula-container">
     <div class="nebula-layer nebula-reflection active" id="nebula-1"></div>
     <div class="nebula-layer" id="nebula-2"></div>
+  </div>
+  <!-- Verification Gate Overlay -->
+  <div id="verification-gate" class="verification-gate">
+    <div class="gate-content">
+      <h2 class="gate-title">Who is reading this?</h2>
+      <div class="input-wrapper">
+        <input type="text" id="gate-input" autocomplete="off" placeholder="type here..." />
+        <div class="input-underline"></div>
+      </div>
+      <p id="gate-error" class="gate-error"></p>
+    </div>
   </div>
 
   <!-- Floating mute/unmute control -->
@@ -40,7 +51,7 @@
   <main class="scene">
     
     <!-- Envelope element -->
-    <div class="envelope-wrapper" id="envelope-wrapper">
+    <div class="envelope-wrapper locked" id="envelope-wrapper">
       <div class="envelope" id="envelope">
         <!-- Back flap representing the inner pocket -->
         <div class="envelope-back"></div>
@@ -111,6 +122,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>
