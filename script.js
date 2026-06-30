@@ -496,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (index === letterParts.length - 1) {
         nextBtn.querySelector('.next-label').textContent = 'Give Your Special Touch';
       } else {
-        nextBtn.querySelector('.next-label').textContent = 'Next';
+        nextBtn.querySelector('.next-label').textContent = 'Turn the Page';
       }
     });
   }
