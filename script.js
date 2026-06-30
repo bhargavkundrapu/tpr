@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Audio setup
   const bgAudio = new Audio('New Project (1).mp3');
-  bgAudio.volume = 0.6; // Gentle volume for background music
+  bgAudio.volume = 0.1; // Gentle volume for background music
 
   // Custom looping behavior: first time full, then repeat leaving first 10s
   bgAudio.addEventListener('ended', () => {
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Unlock
       gateError.classList.remove('show');
       gate.classList.add('unlocked');
-      
+
       // Reveal envelope and mute button
       setTimeout(() => {
         envelopeWrapper.classList.remove('locked');
@@ -494,9 +494,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update next button label
       if (index === letterParts.length - 1) {
-        nextBtn.querySelector('.next-label').textContent = 'Read Climax';
+        nextBtn.querySelector('.next-label').textContent = 'Special With Your Touch';
       } else {
-        nextBtn.querySelector('.next-label').textContent = 'Read Next';
+        nextBtn.querySelector('.next-label').textContent = 'Next';
       }
     });
   }
@@ -673,7 +673,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (distance < repelRadius) {
         const force = (repelRadius - distance) / repelRadius; // 0 to 1
         const strength = force * 2.5; // repelling speed multiplier
-        
+
         p.vx += (diffX / (distance || 1)) * strength;
         p.vy += (diffY / (distance || 1)) * strength;
       }
@@ -697,7 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (p.x > width + 50) p.x = -30;
 
       // Transform DOM
-      p.el.style.transform = `translate3d(${p.x - p.size/2}px, ${p.y - p.size/2}px, 0)`;
+      p.el.style.transform = `translate3d(${p.x - p.size / 2}px, ${p.y - p.size / 2}px, 0)`;
     });
 
     requestAnimationFrame(animateMemories);
