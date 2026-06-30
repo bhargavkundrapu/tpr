@@ -494,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update next button label
       if (index === letterParts.length - 1) {
-        nextBtn.querySelector('.next-label').textContent = 'Special With Your Touch';
+        nextBtn.querySelector('.next-label').textContent = 'Give Your Special Touch';
       } else {
         nextBtn.querySelector('.next-label').textContent = 'Next';
       }
