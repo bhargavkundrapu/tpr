@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 300);
     } else {
       // Incorrect: show mysterious space message
-      gateError.textContent = "This letter is traveling through the cosmos to find its true destination. It is not meant for you.";
+      gateError.textContent = "This letter is traveling through the universe to find its true destination. It is not meant for you it is ment for a special person...";
       gateError.classList.add('show');
 
       // Shake animation feedback
