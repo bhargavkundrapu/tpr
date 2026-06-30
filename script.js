@@ -3,68 +3,99 @@
 const letterParts = [
   // SECTION 1
   `Before you, I had no reason to look forward to anything.
+
 I just lived with whatever came my way.
-
 But after you…
+
 I started enjoying myself.
+
 I started treating myself as someone special.
+
 Because you made me feel that way.
-
 I began noticing every little thing —
-a song, a moment, a coincidence, a smile…
-and somehow, all of them reminded me of you.
-Every single one came from somewhere deep inside me.
 
+a song, a moment, a coincidence, a smile…
+
+and somehow, all of them reminded me of you.
+
+Every single one came from somewhere deep inside me.
 You were never just a part of my life.
+
 You were the reason I could feel my feelings fully.
+
 You were the reason life felt beautiful —
+
 not just within family…
+
 but beyond it too.`,
 
   // SECTION 2
   `But something happened between us.
+
 Something that was never in my hands.
-
 And even then…
-not even one percent of what I feel for you changed.
 
+not even one percent of what I feel for you changed.
 I accepted your decision.
+
 I moved on from you.
+
 But my feelings?
+
 They never left.
+
 They are still here.
-And they will be, till the very end.`,
+
+And they will be, till the very end.
+
+Because I dont no how to forget 
+
+And there is no issue with that feelings 
+
+when i remember i will be little more happier not sad and i dont feel like something i missed `,
 
   // SECTION 3
   `Please don't feel sad.
+
+
+
+
 Don't carry any guilt.
-
 Because even after all these years…
-you are still the reason I know how to respect a girl.
-You are the reason I know how to face a heartbreak with a calm face.
-You are the reason I learned to smile in the toughest phases of life.
-You are the reason I learned to find a way,
-even when everything was against me.
-You are the reason I discovered how much patience I truly have.
 
+you are still the reason I know how to respect a girl.
+
+You are the reason I know how to face a heartbreak with a calm face.
+
+You are the reason I learned to smile in the toughest phases of life.
+
+You are the reason I learned to find a way,
+
+even when everything was against me.
+
+You are the reason I discovered how much patience I truly have.
 And I feel so lucky…
+
 that I learned all of this so early in life.
+
 It made me stronger than I ever imagined.
 
----
-
 After all these years,
+
 I am genuinely happy.
+
 Happy that you played the most beautiful role in my life.
-
 So please…
-change how you see this.
-Be happy.
-Without any regrets.
 
+change how you see this.
+
+Be happy.
+
+Without any regrets.
 Because all those reasons…
+
 all of them lead to one thing —
-you are the tpr`
+You are tpr`
 ];
 
 // Initialize global objects and state variables
