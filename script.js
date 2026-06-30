@@ -267,24 +267,7 @@ function stopPetalShower() {
   petals.forEach(p => p.remove());
 }
 
-// Handles transitions from letter reading to the climax screen
-function triggerClimaxReveal() {
-  const paper = document.getElementById('letter-container');
-  const climax = document.getElementById('climax-container');
 
-  // Fade out paper
-  paper.style.transition = 'opacity 2s ease, transform 2s ease';
-  paper.style.opacity = '0';
-  paper.style.transform = 'scale(0.9) translateY(-50px)';
-
-  setTimeout(() => {
-    paper.style.display = 'none';
-    climax.style.display = 'flex';
-    climax.style.opacity = '1';
-    console.log("Climax revealed, reset-btn element:", document.getElementById('reset-btn'));
-    startPetalShower();
-  }, 2000);
-}
 
 // Setup Envelope Interaction
 document.addEventListener('DOMContentLoaded', () => {
@@ -516,6 +499,28 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.querySelector('.next-label').textContent = 'Read Next';
       }
     });
+  }
+
+  // Handles transitions from letter reading to the climax screen
+  function triggerClimaxReveal() {
+    const paper = document.getElementById('letter-container');
+    const climax = document.getElementById('climax-container');
+
+    // Change background nebula back to the original deep space navy
+    changeNebulaGlow('nebula-reflection');
+
+    // Fade out paper
+    paper.style.transition = 'opacity 2s ease, transform 2s ease';
+    paper.style.opacity = '0';
+    paper.style.transform = 'scale(0.9) translateY(-50px)';
+
+    setTimeout(() => {
+      paper.style.display = 'none';
+      climax.style.display = 'flex';
+      climax.style.opacity = '1';
+      console.log("Climax revealed, reset-btn element:", document.getElementById('reset-btn'));
+      startPetalShower();
+    }, 2000);
   }
 
   // Next button click handler
